@@ -1,6 +1,9 @@
 @AIWeather_HostAddress = http://localhost:5131
 
-GET {{AIWeather_HostAddress}}/weatherforecast/
+GET {{AIWeather_HostAddress}}/joke/
 Accept: application/json
 
 ###
+
+GET {{AIWeather_HostAddress}}/description?location=Seattle
+Accept: application/json

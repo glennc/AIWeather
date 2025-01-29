@@ -3,39 +3,35 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //This adds an API testing UI and makes it the default when you launch the app.
+    app.UseSwaggerUI(c=>
+    {
+        c.SwaggerEndpoint("/openapi/v1.json", "Weather API");
+        c.RoutePrefix="";
+    });
+
     app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+app.MapGet("/joke", () =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    return "Implement this method to use AI to generate a joke about the weather.";
 })
-.WithName("GetWeatherForecast");
+.WithName("GetWeatherJoke");
+
+app.MapGet("/description", (string location) =>
+{
+    return "Implement this method to use AI to describe the weather at the location specified, this requires tools to allow the AI to find out what the weather is in that location so it can describe it.";
+})
+.WithName("GetWeatherDescription");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

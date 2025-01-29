@@ -12,20 +12,18 @@
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [5000, 5001],
-	// "portsAttributes": {
-	//		"5001": {
-	//			"protocol": "https"
-	//		}
-	// }
+	
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
 	// Configure tool-specific properties.
 	"customizations": {
+		"codespaces": {
+			"openFiles": ["program.cs"]
+		},
 		"vscode": {
-			"extensions": ["ms-dotnettools.csdevkit", "GitHub.copilot-chat"]
+			"extensions": ["ms-dotnettools.csdevkit", "GitHub.copilot-chat", "humao.rest-client"]
 		}
 	}
 

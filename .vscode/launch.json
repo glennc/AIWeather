@@ -8,7 +8,7 @@
             "name": "C#: AIWeather Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/AIWeather.csproj"
+            "projectPath": "${workspaceFolder}/AIWeather.csproj",
         }
 
     ]
